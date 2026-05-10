@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aneesh Jerome & Jamuna C. John — Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --pink: #e8a0b4;
+    --pink-light: #f7e1ea;
+    --pink-pale: #fdf5f8;
+    --ivory: #faf6f0;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --text-dark: #2d1a24;
+    --text-mid: #6b4a58;
+    --text-soft: #a07888;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background-color: var(--ivory);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── COVER ── */
+  #cover {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, #f9e8f0 0%, #fdf5f8 50%, #f9e8f0 100%);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  #cover.open { opacity: 0; pointer-events: none; transform: scale(1.05); }
+
+  .cover-inner { text-align: center; padding: 2rem; }
+  .cover-rings {
+    width: 90px; height: 90px; margin: 0 auto 2rem;
+    position: relative;
+  }
+  .ring {
+    width: 54px; height: 54px; border-radius: 50%;
+    border: 3px solid var(--gold);
+    position: absolute; top: 18px;
+  }
+  .ring1 { left: 0; }
+  .ring2 { left: 30px; background: transparent; }
+  .cover-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 0.35em;
+    color: var(--text-soft); text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .cover-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    font-weight: 300; color: var(--text-dark);
+    line-height: 1.15;
+  }
+  .cover-amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-style: italic;
+    color: var(--gold); display: block; margin: 0.3rem 0;
+  }
+  .cover-date {
+    margin-top: 1.5rem;
+    font-size: 12px; letter-spacing: 0.25em;
+    color: var(--text-mid); text-transform: uppercase;
+  }
+  .cover-tap {
+    margin-top: 2.5rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: var(--text-soft); text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .cover-tap svg { width: 18px; height: 18px; stroke: var(--gold); }
+  @keyframes pulse { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+
+  /* ── PETALS BG ── */
+  .petals-bg {
+    pointer-events: none; position: fixed; inset: 0; z-index: 0; overflow: hidden;
+  }
+  .petal {
+    position: absolute; width: 12px; height: 18px; border-radius: 50% 50% 50% 0;
+    background: var(--pink-light); opacity: 0.5;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-40px) rotate(0deg); opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── CONTENT ── */
+  #content { position: relative; z-index: 10; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 5rem 1.5rem 4rem;
+    background: linear-gradient(180deg, #fdf5f8 0%, var(--ivory) 100%);
+  }
+  .hero-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-style: italic; color: var(--text-soft);
+    max-width: 480px; line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+  .hero-verse-ref {
+    font-size: 11px; letter-spacing: 0.25em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 3rem;
+  }
+  .hero-blessing {
+    font-size: 14px; color: var(--text-mid);
+    max-width: 500px; line-height: 1.9; margin-bottom: 3rem;
+    letter-spacing: 0.02em;
+  }
+  .divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    width: 100%; max-width: 420px; margin: 0 auto 3.5rem;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--gold-light); }
+  .divider-heart { color: var(--pink); font-size: 20px; }
+
+  .couple-block { text-align: center; }
+  .person-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    font-weight: 400; color: var(--text-dark);
+    letter-spacing: 0.04em; line-height: 1.1;
+    margin-bottom: 0.6rem;
+  }
+  .person-info { font-size: 13px; color: var(--text-mid); line-height: 1.8; }
+  .person-info strong { color: var(--text-dark); font-weight: 500; display: block; }
+
+  .amp-circle {
+    width: 70px; height: 70px; border-radius: 50%;
+    border: 1.5px solid var(--pink);
+    display: flex; align-items: center; justify-content: center;
+    margin: 2.5rem auto;
+  }
+  .amp-circle span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-style: italic; color: var(--gold);
+  }
+
+  /* ── PHOTO PLACEHOLDER ── */
+  .photo-wrap {
+    margin: 4rem auto 0; max-width: 380px; width: 100%;
+    padding: 0 1.5rem;
+  }
+  .photo-box {
+    aspect-ratio: 4/3; border-radius: 20px;
+    border: 2px dashed var(--pink);
+    background: var(--pink-pale);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px; color: var(--text-soft);
+  }
+  .photo-box svg { width: 40px; height: 40px; stroke: var(--pink); }
+  .photo-box p { font-size: 13px; letter-spacing: 0.1em; }
+
+  /* ── SECTION ── */
+  section { padding: 5rem 1.5rem; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400; text-align: center;
+    color: var(--text-dark); margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    text-align: center; font-size: 11px;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 3rem;
+  }
+
+  /* ── ENGAGEMENT CARD ── */
+  .engagement-card {
+    max-width: 720px; margin: 0 auto;
+    background: white; border-radius: 28px;
+    border: 1.5px solid var(--gold-light);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(201, 169, 110, 0.10);
+  }
+  .engagement-card-top {
+    background: linear-gradient(135deg, #fdf8ef 0%, #fffdf5 100%);
+    padding: 3rem 2rem 2rem; text-align: center;
+    border-bottom: 1px solid var(--gold-light);
+  }
+  .engagement-card-top .big-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300; color: var(--text-dark);
+    line-height: 1; margin-bottom: 0.3rem;
+  }
+  .engagement-card-top .big-date span { color: var(--gold); }
+  .engagement-card-top .day-label {
+    font-size: 12px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--text-soft);
+  }
+  .engagement-badge {
+    display: inline-block;
+    background: var(--gold-light);
+    color: #7a5a1a;
+    font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 5px 16px; border-radius: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── WEDDING CARD ── */
+  .wedding-card {
+    max-width: 720px; margin: 0 auto;
+    background: white; border-radius: 28px;
+    border: 1.5px solid var(--pink-light);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(200, 100, 140, 0.08);
+  }
+  .wedding-card-top {
+    background: linear-gradient(135deg, #fdf0f5 0%, #fff8f0 100%);
+    padding: 3rem 2rem 2rem; text-align: center;
+    border-bottom: 1px solid var(--pink-light);
+  }
+  .wedding-card-top .big-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300; color: var(--text-dark);
+    line-height: 1; margin-bottom: 0.3rem;
+  }
+  .wedding-card-top .big-date span { color: var(--pink); }
+  .wedding-card-top .day-label {
+    font-size: 12px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--text-soft);
+  }
+
+  .info-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0; 
+  }
+  .info-cell {
+    padding: 2rem 1.5rem; text-align: center;
+    border-right: 1px solid var(--pink-light);
+    border-bottom: 1px solid var(--pink-light);
+  }
+  .info-cell.gold-border {
+    border-right-color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+  }
+  .info-cell:last-child { border-right: none; }
+  .info-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--pink-pale); margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .info-icon.gold-icon { background: #fdf8ef; }
+  .info-icon svg { width: 20px; height: 20px; stroke: var(--pink); }
+  .info-icon.gold-icon svg { stroke: var(--gold); }
+  .info-label {
+    font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .info-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--text-dark); line-height: 1.4;
+  }
+  .info-sub { font-size: 12px; color: var(--text-soft); margin-top: 4px; }
+
+  /* ── COUNTDOWN ── */
+  .countdown-wrap { text-align: center; padding: 3rem 1.5rem; }
+  .countdown-label {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-soft); margin-bottom: 2rem;
+  }
+  .countdown-grid {
+    display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .count-box { text-align: center; }
+  .count-num {
+    width: 72px; height: 72px; border-radius: 16px;
+    border: 1.5px solid var(--pink-light);
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+  .count-num.gold-count { border-color: var(--gold-light); }
+  .count-unit {
+    font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  /* ── RECEPTION ── */
+  .reception-box {
+    max-width: 520px; margin: 2rem auto 0;
+    background: var(--pink-pale); border-radius: 20px;
+    border: 1px solid var(--pink-light);
+    padding: 2rem; text-align: center;
+  }
+  .reception-box.gold-box {
+    background: #fdf8ef;
+    border-color: var(--gold-light);
+  }
+  .reception-box h3 {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .reception-box p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--text-dark); line-height: 1.6;
+  }
+  .reception-time {
+    margin-top: 0.75rem; font-size: 13px;
+    color: var(--text-mid); letter-spacing: 0.1em;
+  }
+
+  /* ── MAP ── */
+  .map-wrap {
+    max-width: 720px; margin: 2.5rem auto 0;
+    border-radius: 20px; overflow: hidden;
+    border: 1.5px solid var(--pink-light);
+  }
+  .map-wrap iframe { display: block; }
+
+  /* ── CONTACT ── */
+  .contact-section { background: var(--pink-pale); }
+  .contact-card {
+    max-width: 480px; margin: 0 auto;
+    background: white; border-radius: 24px;
+    border: 1.5px solid var(--pink-light);
+    padding: 2.5rem; text-align: center;
+  }
+  .contact-card h3 {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .contact-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.5rem;
+  }
+  .contact-phone {
+    font-size: 15px; color: var(--text-mid);
+    text-decoration: none; letter-spacing: 0.05em;
+  }
+  .contact-phone:hover { color: var(--pink); }
+  .contact-divider { height: 1px; background: var(--pink-light); margin: 1.5rem 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 3rem 1.5rem;
+    background: var(--text-dark); color: rgba(255,255,255,0.5);
+    font-size: 12px; letter-spacing: 0.1em;
+  }
+  footer .footer-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; color: white; margin-bottom: 0.5rem;
+    font-weight: 300;
+  }
+  footer .footer-date { color: var(--gold); letter-spacing: 0.25em; font-size: 12px; }
+
+  /* ── BORDER DECORATIONS ── */
+  .floral-border {
+    text-align: center; padding: 1.5rem;
+    font-size: 22px; color: var(--pink-light); letter-spacing: 0.5em;
+  }
+
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .info-cell { border-right: none; }
+  }
+
+  /* ── MUSIC PLAYER ── */
+  #music-player {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    display: flex; align-items: center; gap: 10px;
+  }
+  #music-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--pink);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(232,160,180,0.5);
+    transition: transform 0.2s, background 0.2s;
+    flex-shrink: 0;
+  }
+  #music-btn:hover { transform: scale(1.1); background: #d9809a; }
+  #music-btn svg { width: 22px; height: 22px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  #music-label {
+    background: white; border: 1px solid var(--pink-light);
+    border-radius: 30px; padding: 6px 14px;
+    font-size: 11px; letter-spacing: 0.15em; color: var(--text-mid);
+    white-space: nowrap; box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    animation: fadeInRight 0.4s ease;
+  }
+  @keyframes fadeInRight { from{opacity:0;transform:translateX(10px);} to{opacity:1;transform:translateX(0);} }
+
+  #music-btn.playing { animation: spin-slow 4s linear infinite; }
+  @keyframes spin-slow { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+  #music-btn.playing:hover { animation: spin-slow 4s linear infinite, scale-up 0.2s forwards; }
+</style>
+</head>
+<body>
+
+<!-- Falling petals -->
+<div class="petals-bg" id="petals"></div>
+
+<!-- COVER PAGE -->
+<div id="cover" onclick="openInvitation()">
+  <div class="cover-inner">
+    <div class="cover-rings">
+      <div class="ring ring1"></div>
+      <div class="ring ring2"></div>
+    </div>
+    <p class="cover-label">Wedding Invitation</p>
+    <div class="cover-names">
+      Aneesh Jerome
+      <span class="cover-amp">&</span>
+      Jamuna C. John
+    </div>
+    <p class="cover-date">Monday · May 25, 2026</p>
+    <div class="cover-tap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 11.5V7a2 2 0 1 1 4 0v4.5"/>
+        <path d="M11 7.5a2 2 0 1 1 4 0v2"/>
+        <path d="M15 9.5a2 2 0 1 1 4 0v4a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-1a2 2 0 0 1 4 0"/>
+      </svg>
+      Tap to Open
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-verse">"I have found the one whom my soul loves."</p>
+    <p class="hero-verse-ref">— Song of Solomon 3:4</p>
+    <p class="hero-blessing">With the grace of Almighty God and with joyful hearts, we warmly request your presence and prayers to celebrate the Sacrament of Holy Matrimony of our son</p>
+
+    <div class="couple-block">
+      <div class="person-name">Aneesh Jerome</div>
+      <div class="person-info">
+        <strong>S/o Mr. Andrayose Jerome & Mrs. Jyothi Jerome</strong>
+        Sneha Mandir, Uriyarikunnu, Puthiyathura<br/>
+        Pulluvila P.O — 695526<br/>
+        <span style="color:var(--gold);font-size:12px;letter-spacing:0.1em;">📞 9946452255</span>
+      </div>
+    </div>
+
+    <div class="amp-circle"><span>&</span></div>
+
+    <div class="couple-block">
+      <div class="person-name">Jamuna C. John</div>
+      <div class="person-info">
+        <strong>D/o Mr. MaryJohn & Mrs. Christhumary</strong>
+        Loordhunagar, Tsunami Colony, Marthandanthurai<br/>
+        Kollemcode P.O, K.K. District, Tamil Nadu — 629160
+      </div>
+    </div>
+
+    <!-- Couple Photo -->
+    <div class="photo-wrap">
+      <img src="../public/couple.jpg" alt="Aneesh & Jamuna" style="width: 100%; border-radius: 20px; border: 2px solid var(--pink-light); box-shadow: 0 10px 40px rgba(200, 100, 140, 0.15);">
+    </div>
+  </div>
+
+  <div class="floral-border">✿ ❀ ✿ ❀ ✿</div>
+
+  <!-- ── ENGAGEMENT SECTION ── -->
+  <section style="background: #fdf8ef;">
+    <h2 class="section-title">Engagement Ceremony</h2>
+    <p class="section-sub">A blessed beginning</p>
+
+    <div class="engagement-card">
+      <div class="engagement-card-top">
+        <div class="engagement-badge">Engagement</div>
+        <div class="big-date">MAY <span>17</span></div>
+        <div class="day-label">Sunday · 2026</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-cell gold-border">
+          <div class="info-icon gold-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+          </div>
+          <div class="info-label">Date</div>
+          <div class="info-value">Sunday, 17th May 2026</div>
+        </div>
+        <div class="info-cell gold-border">
+          <div class="info-icon gold-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div class="info-label">Time</div>
+          <div class="info-value">11:30 AM</div>
+        </div>
+        <div class="info-cell gold-border">
+          <div class="info-icon gold-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 5-7 13-8 13S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="info-label">Venue</div>
+          <div class="info-value">St. Nicholas Church</div>
+          <div class="info-sub">Community Hall</div>
+        </div>
+      </div>
+
+      <!-- Engagement venue note -->
+      <div style="padding: 0 2rem 3rem;">
+        <div class="reception-box gold-box">
+          <h3>Venue Details</h3>
+          <p>St. Nicholas Church<br/>Community Hall</p>
+          <p class="reception-time">Sunday, 17th May 2026 · 11:30 AM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="floral-border">✿ ❀ ✿ ❀ ✿</div>
+
+  <!-- WEDDING SECTION -->
+  <section style="background: white;">
+    <h2 class="section-title">Wedding Ceremony</h2>
+    <p class="section-sub">Join us as we celebrate</p>
+
+    <div class="wedding-card">
+      <div class="wedding-card-top">
+        <div class="big-date">MAY <span>25</span></div>
+        <div class="day-label">Monday · 2026</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+          </div>
+          <div class="info-label">Date</div>
+          <div class="info-value">Monday, 25th May 2026</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div class="info-label">Time</div>
+          <div class="info-value">10:30 AM</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 5-7 13-8 13S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="info-label">Church</div>
+          <div class="info-value">St. John of the Cross Church</div>
+          <div class="info-sub">Siluvaipuram</div>
+        </div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="countdown-wrap">
+        <p class="countdown-label">Counting down to the big day</p>
+        <div class="countdown-grid">
+          <div class="count-box"><div class="count-num" id="cd-d">00</div><div class="count-unit">Days</div></div>
+          <div class="count-box"><div class="count-num" id="cd-h">00</div><div class="count-unit">Hours</div></div>
+          <div class="count-box"><div class="count-num" id="cd-m">00</div><div class="count-unit">Mins</div></div>
+          <div class="count-box"><div class="count-num" id="cd-s">00</div><div class="count-unit">Secs</div></div>
+        </div>
+      </div>
+
+      <!-- Reception -->
+      <div style="padding: 0 2rem 3rem;">
+        <div class="reception-box">
+          <h3>Reception</h3>
+          <p>JC Community Hall,<br/>Siluvaipuram</p>
+          <p class="reception-time">To follow after the ceremony</p>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div style="padding: 0 2rem 2.5rem;">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=St+John+of+the+Cross+Church+Siluvaipuram&output=embed"
+            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+        <div style="text-align:center;margin-top:1rem;">
+          <a href="https://maps.app.goo.gl/erTqKMufeNFZVnH68" target="_blank"
+            style="display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dark);text-decoration:none;border:1.5px solid var(--pink);padding:10px 20px;border-radius:50px;transition:all 0.2s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 5-7 13-8 13S4 15 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="floral-border">✿ ❀ ✿ ❀ ✿</div>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">For any questions or assistance</p>
+
+    <div style="display:flex;flex-direction:column;gap:1.5rem;max-width:520px;margin:0 auto;">
+      <div class="contact-card">
+        <h3>Parents of the Groom</h3>
+        <p class="contact-name">Mr. Andrayose Jerome & Mrs. Jyothi Jerome</p>
+        <a class="contact-phone" href="tel:9946452255">9946452255</a>
+      </div>
+      <div class="contact-card" style="background:var(--pink-pale);">
+        <h3>Sharing the Happiness</h3>
+        <p class="contact-name">Sneha Jerome & Arun Jerome</p>
+        <p style="font-size:13px;color:var(--text-soft);margin-top:0.5rem;">Brothers of the Groom</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-names">Aneesh & Jamuna</div>
+    <div class="footer-date">Engagement: Sunday · May 17, 2026 &nbsp;|&nbsp; Wedding: Monday · May 25, 2026</div>
+    <p style="margin-top:1.5rem;">St. John of the Cross Church · Siluvaipuram</p>
+  </footer>
+
+</div>
+
+<!-- MUSIC PLAYER -->
+<audio id="bg-music" loop preload="auto">
+  <source src="../public/love-music.mp3" type="audio/mpeg"/>
+</audio>
+
+<div id="music-player">
+  <span id="music-label" style="display:none;">They Call It Love ♪</span>
+  <button id="music-btn" onclick="toggleMusic()" title="Play / Pause music" aria-label="Play or pause background music">
+    <svg id="icon-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <svg id="icon-pause" viewBox="0 0 24 24" style="display:none;"><line x1="6" y1="4" x2="6" y2="20"/><line x1="18" y1="4" x2="18" y2="20"/></svg>
+  </button>
+</div>
+
+<script>
+// Generate petals
+(function(){
+  const wrap = document.getElementById('petals');
+  for(let i=0;i<18;i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.cssText = `left:${Math.random()*100}%;top:${-20+Math.random()*-80}px;animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;transform:rotate(${Math.random()*360}deg);opacity:${0.3+Math.random()*0.4};`;
+    wrap.appendChild(p);
+  }
+})();
+
+// Open invitation + autoplay music
+function openInvitation(){
+  document.getElementById('cover').classList.add('open');
+  setTimeout(()=>{ document.getElementById('cover').style.display='none'; }, 900);
+  const audio = document.getElementById('bg-music');
+  audio.volume = 0.35;
+  audio.play().then(()=>{
+    document.getElementById('music-btn').classList.add('playing');
+    document.getElementById('icon-play').style.display = 'none';
+    document.getElementById('icon-pause').style.display = '';
+    const label = document.getElementById('music-label');
+    label.style.display = 'block';
+    setTimeout(()=>{ label.style.display='none'; }, 4000);
+  }).catch(()=>{});
+}
+
+// Toggle music play/pause
+function toggleMusic(){
+  const audio = document.getElementById('bg-music');
+  const btn = document.getElementById('music-btn');
+  const label = document.getElementById('music-label');
+  if(audio.paused){
+    audio.volume = 0.35;
+    audio.play();
+    btn.classList.add('playing');
+    document.getElementById('icon-play').style.display = 'none';
+    document.getElementById('icon-pause').style.display = '';
+    label.style.display = 'block';
+    setTimeout(()=>{ label.style.display='none'; }, 3500);
+  } else {
+    audio.pause();
+    btn.classList.remove('playing');
+    document.getElementById('icon-play').style.display = '';
+    document.getElementById('icon-pause').style.display = 'none';
+    label.style.display = 'none';
+  }
+}
+
+// Engagement countdown — May 17, 2026 at 11:30 AM IST
+function updateEngagementCountdown(){
+  const target = new Date('2026-05-17T11:30:00+05:30');
+  const now = new Date();
+  const diff = target - now;
+  if(diff <= 0){
+    ['en-d','en-h','en-m','en-s'].forEach(id=>document.getElementById(id).textContent='00');
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('en-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('en-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('en-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('en-s').textContent = String(s).padStart(2,'0');
+}
+
+// Wedding countdown — May 25, 2026 at 10:30 AM IST
+function updateCountdown(){
+  const target = new Date('2026-05-25T10:30:00+05:30');
+  const now = new Date();
+  const diff = target - now;
+  if(diff <= 0){
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+
+updateEngagementCountdown();
+updateCountdown();
+setInterval(()=>{ updateEngagementCountdown(); updateCountdown(); }, 1000);
+</script>
+</body>
+</html>
